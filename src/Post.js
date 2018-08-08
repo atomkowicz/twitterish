@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { getPost } from './API';
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
+
 
 class Post extends Component {
 
@@ -24,7 +26,19 @@ class Post extends Component {
                 isFetched: true
             })
         }).catch(err => {
-            this.props.history.push(`/404`);
+            console.log(err);
+            switch (err) {
+                case 404:
+                    this.props.history.push(`/404`);
+                    break;
+                default:
+                    this.setState({
+                        showModal: true,
+                        errMsg: err.statusText
+                    })
+                    break;
+            }
+
         });
     }
 
@@ -36,7 +50,7 @@ class Post extends Component {
 
     render() {
 
-        const { isFetched, showModal, post: {id, title, body, userId } } = this.state;
+        const { isFetched, showModal, post: { id, title, body, userId } } = this.state;
         const names = ["Spryga", "Shenanigans", "Fiddledeedee", "Bovicide", "Bloviate", "CluelBean", "Leukoplakia"];
         const author = names[Math.floor(Math.random() * 8) + 1];
 
@@ -59,7 +73,10 @@ class Post extends Component {
                     contentLabel="Example Modal">
                     <h2 >Error</h2>
                     <div>Something's wrong...{this.state.errMsg}</div>
-                    <button onClick={(e) => this.setState({ showModal: false })}>close</button>
+                    <Link to={"/posts"}>
+                        <button>close</button>
+                    </Link>
+
                 </Modal>
             </div>
 
