@@ -1,13 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class Header extends Component {
 
+
     render() {
+        const { auth } = this.props;
+
         return (
-            <header className="Header">
-                <button>Logout</button>
-                <input type="text" placeholder="search" />
-            </header>
+            <React.Fragment>
+                {auth ?
+                    <header className="Header">
+                        <button>Logout</button>
+                        <input type="text" placeholder="search" />
+                    </header>
+                    :
+                    <header className="Header">
+                        <div class="title">Twitterish</div>
+                    </header>
+                }
+            </React.Fragment>
         );
     }
 }
