@@ -15,12 +15,33 @@ body {
   flex-flow: column;
 }
 
+a {
+  text-decoration: none;
+  color: gray;
+}
+
 .title {
   font-size: 1.6em;
   font-weight: bold;
   color: gray;
   text-align: center;
   width: 100%;
+}
+
+.error-page {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  align-self: center;
+}
+.error-page span {
+  color: red;
+  padding: 0 10px;
+  font-weight: bold;
 }
 
 /* Components */
@@ -41,7 +62,7 @@ body {
   flex: 1;
 }
 
-.PostList {
+.TileList {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -51,7 +72,7 @@ body {
   justify-content: space-between;
 }
 
-.Post {
+.Tile {
   background: white;
   display: flex;
   background: #fff;
@@ -65,34 +86,56 @@ body {
 }
 
 @media screen and (min-width:768px) {
-  .Post {
-  width: calc(100%/2 - 60px);
+  .Tile {
+  width: calc(100%/2 - 15px);
   }
 }
-@media screen and (min-width:1200px) {
-  .Post {
+@media screen and (min-width:1000px) {
+  .Tile {
   width: calc(100%/3 - 60px);
   }
 }
 
-.Post__inner {
+.Tile__inner {
   padding: 60px 40px;
   flex: 1 1;
   overflow: hidden;
-  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   justify-content: space-between;
 }
 
-.Post__title {
+.Tile__title, .Post__title {
   font-size: 1.6em;
   font-weight: bold;
 }
 
-.Post__id {
+.Tile__id {
   font-size: 1em;
   font-weight: 100;
+}
+
+.Post {
+  background: white;
+  display: flex;
+  align-self: center;
+  border-radius: 2px;
+  height: 300px;
+  margin: 1rem 0 1rem 0;
+  padding: 20px;
+  position: relative;
+  width: 90%;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.Post__title {
+  padding: 20px 0;
+  
+}
+.Post__title::first-letter,
+.Post__body::first-letter {
+  text-transform: capitalize;
 }
 
 .Login {

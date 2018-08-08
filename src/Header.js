@@ -1,21 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 class Header extends Component {
 
 
     render() {
-        const { auth } = this.props;
+        const { isUserLoggedIn } = this.props;
 
         return (
             <React.Fragment>
-                {auth ?
+                {isUserLoggedIn ?
                     <header className="Header">
                         <button>Logout</button>
                         <input type="text" placeholder="search" />
                     </header>
                     :
                     <header className="Header">
-                        <div class="title">Twitterish</div>
+                        <div className="title">Your table</div>
                     </header>
                 }
             </React.Fragment>

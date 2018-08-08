@@ -6,12 +6,18 @@ const headers = {
 
 export const getPosts = () => {
     return fetch(`${API_URL}/posts`, { headers })
-        .then(resp => resp.json())
+        .then(response => response.json())
         .then(data => data);
 }
 
 export const getPost = (postId) => {
     return fetch(`${API_URL}/posts/${postId}`)
-        .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.status);
+            }
+            return response;
+        })
+        .then(response => response.json())
+        .then(data => data)
 }
