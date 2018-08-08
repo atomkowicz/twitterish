@@ -7,18 +7,9 @@ class Header extends Component {
         const { isUserLoggedIn } = this.props;
 
         return (
-            <React.Fragment>
-                {isUserLoggedIn ?
-                    <header className="Header">
-                        <button>Logout</button>
-                        <input type="text" placeholder="search" />
-                    </header>
-                    :
-                    <header className="Header">
-                        <div className="title">Your table</div>
-                    </header>
-                }
-            </React.Fragment>
+            <header className="Header">
+                <div className="title">Some name</div>
+            </header>
         );
     }
 }

@@ -27,17 +27,18 @@ class Post extends Component {
             })
         }).catch(err => {
             console.log(err);
-            switch (err) {
-                case 404:
-                    this.props.history.push(`/404`);
-                    break;
-                default:
-                    this.setState({
-                        showModal: true,
-                        errMsg: err.statusText
-                    })
-                    break;
-            }
+            this.props.history.push(`/404`);
+            // switch (err) {
+            //     case 404:
+            //         this.props.history.push(`/404`);
+            //         break;
+            //     default:
+            //         this.setState({
+            //             showModal: true,
+            //             errMsg: err.statusText
+            //         })
+            //         break;
+            // }
 
         });
     }
@@ -45,8 +46,6 @@ class Post extends Component {
     handleCloseModal() {
         this.setState({ showModal: false });
     }
-
-
 
     render() {
 
