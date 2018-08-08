@@ -34,11 +34,11 @@ body {
 }
 
 .Header input {
-  width: calc(100%*2/3 - 180px);
+  flex: 3;
 }
 
 .Header button {
-  width: calc(100%/3 - 120px);
+  flex: 1;
 }
 
 .PostList {
@@ -113,7 +113,10 @@ body {
 
 /* Forms */
 
-
+form {
+  display: flex;
+  flex-flow: column;
+}
 
 /* Fields */
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -135,7 +138,6 @@ body {
 }
 
 button {
-  width: calc(100%/3 - 80px);
   background-color: rgb(156, 155, 155);
 }
 
