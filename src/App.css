@@ -1,22 +1,4 @@
-.App-header {
-  background-color: #222;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-  text-align: center;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/* Base */
 
 body {
   background: #e2e1e0;
@@ -27,9 +9,20 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  flex-flow: column;
 }
 
-.post-list {
+/* Components */
+
+.Header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.PostList {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -39,25 +32,32 @@ body {
   justify-content: space-between;
 }
 
-.post-list-item {
+.Post {
   background: white;
   display: flex;
   background: #fff;
   border-radius: 2px;
-  display: inline-block;
   height: 300px;
-  margin: 1rem;
+  margin: 1rem 0 1rem 0;
   position: relative;
-  width: calc(100%/3 - 60px);
+  width: 100%;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
-
 }
 
-.post-details {
+@media screen and (min-width:768px) {
+  .Post {
+  width: calc(100%/2 - 60px);
+  }
+}
+@media screen and (min-width:1200px) {
+  .Post {
+  width: calc(100%/3 - 60px);
+  }
+}
+
+.Post__inner {
   padding: 60px 40px;
-  /* border: 5px solid #eee; */
   flex: 1 1;
   overflow: hidden;
   display: -ms-flexbox;
@@ -66,7 +66,54 @@ body {
   justify-content: space-between;
 }
 
-.post-title {
+.Post__title {
   font-size: 1.6em;
   font-weight: bold;
+}
+
+.Post__id {
+  font-size: 1em;
+  font-weight: 100;
+}
+
+/* Forms */
+
+input {
+  width: calc(100%*2/3 - 120px);
+}
+
+/* Fields */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #aaa;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ color:    #aaa;
+ opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ color:    #aaa;
+ opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    #aaa;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:    #aaa;
+}
+
+button {
+  width: calc(100%/3 - 80px);
+}
+
+button, input {
+ min-width: 250px;
+ background-color: #e2e1e0;
+ border: none;
+ color: #222;
+ font-size: 1em;
+ padding: 10px 50px;
+ text-transform: uppercase;
+ font-weight: normal;
+ letter-spacing: 1.2px;
+ border-radius: 6px;
 }

@@ -5,8 +5,8 @@ const PostList = (props) => {
     const { posts } = props;
 
     return (
-        <div className="post-list">
-            {posts.map(post => <Post key={post.id} post={post} />)}
+        <div className="PostList">
+            {posts.sort((a, b) => b.id - a.id).map(post => <Post key={post.id} post={post} />)}
         </div>
     )
 };
