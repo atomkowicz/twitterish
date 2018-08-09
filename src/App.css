@@ -51,7 +51,14 @@ a {
   padding: 20px;
   color: white;
   display: flex;
+  flex-flow: column;
   justify-content: space-between;
+}
+
+@media screen and (min-width:768px) {
+  .Header  {
+    flex-flow: row;
+  }
 }
 
 .Header input {
@@ -96,12 +103,20 @@ a {
   }
 }
 
+.Tile__container {
+  padding: 60px 40px;
+  flex: 1 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
 .Tile__inner {
   padding: 60px 40px;
   flex: 1 1;
   overflow: hidden;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   justify-content: space-between;
 }
 
@@ -154,6 +169,12 @@ a {
   flex: 1;
 }
 
+.Login__hint {
+  font-size: 11px;
+  color: gray;
+  text-align: center;
+}
+
 /* Forms */
 
 form {
@@ -196,3 +217,20 @@ button, input {
  border-radius: 6px;
  margin: 20px;
 }
+input:focus:invalid {
+  background-color: pink;
+  border: 1px solid red;
+}
+
+
+/* Animations */
+
+/* .Tile {
+  opacity: 0.01;
+  animation-name: fadein;
+}
+
+@keyframes fadein {
+  0% {opacity: 0.01;}
+  100% {opacity: 1;}
+} */

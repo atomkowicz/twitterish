@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import Tile from './Tile';
 import escapeRegExp from 'escape-string-regexp'
-
+import { getPosts } from '../API';
 
 class PostList extends Component {
 
     constructor() {
         super();
         this.state = {
-            query: ""
+            query: "",
+            posts: [],
         }
     }
 
     updateQuery = (query) => {
         this.setState({
-            query: query.trim()
+            query: query
         });
     }
 
@@ -24,13 +25,18 @@ class PostList extends Component {
         })
     }
 
+    componentDidMount() {
+        getPosts().then(posts => {
+            this.setState({
+                posts
+            })
+        })
+    }
+
 
     render() {
-        let postToShow;
-
-
-        const { posts, isReady } = this.props;
-        const { query } = this.state;
+        let postToShow = [];
+        const { posts, query } = this.state;
 
         if (query) {
             const match = new RegExp(escapeRegExp(query), "i");
@@ -38,6 +44,11 @@ class PostList extends Component {
         } else {
             postToShow = posts;
         }
+
+        const sortedPosts = postToShow
+            .sort((a, b) => b.id - a.id)
+            .map((post, index) => <Tile key={post.id} showTile={false} post={post} />);
+
 
         return (
             <div className="TileList">
@@ -49,10 +60,8 @@ class PostList extends Component {
                         value={query}
                         onChange={(event) => this.updateQuery(event.target.value)} />
                 </div>
-                {isReady ?
-                    <div className="Tile__inner">
-                        {postToShow.sort((a, b) => b.id - a.id).map(post => <Tile key={post.id} post={post} />)}
-                    </div>
+                {postToShow
+                    ? <div className="Tile__container">{sortedPosts}</div>
                     : < div > loading ...</div>}
             </div >
         );

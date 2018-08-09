@@ -1,4 +1,4 @@
-const API_URL = "https://jsonplaceholder.typicode.com";
+import {API_URL} from './const';
 
 const headers = {
     'Accept': 'application/json'

@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-const PageNotFound = (props) => {
+const PageNotFound = () => {
 
     return (
         <div className="error-page">
             <h1>Error 404 </h1>
             <p>no such page
-            <Link to={'/posts'}>
+                <Link to={'/posts'}>
                     <span> return to posts</span>
                 </Link>
             </p>

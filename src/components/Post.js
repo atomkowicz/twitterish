@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getPost } from './API';
+import { getPost } from '../API';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,6 @@ class Post extends Component {
             showModal: false,
             errMsg: ""
         }
-
     }
 
     componentDidMount() {
@@ -27,7 +26,7 @@ class Post extends Component {
             })
         }).catch(err => {
             console.log(err);
-            this.props.history.push(`/404`);
+            // this.props.history.push(`/404`);
             // switch (err) {
             //     case 404:
             //         this.props.history.push(`/404`);
@@ -49,7 +48,7 @@ class Post extends Component {
 
     render() {
 
-        const { isFetched, showModal, post: { id, title, body, userId } } = this.state;
+        const { isFetched, post: { id, title, body, userId } } = this.state;
         const names = ["Spryga", "Shenanigans", "Fiddledeedee", "Bovicide", "Bloviate", "CluelBean", "Leukoplakia"];
         const author = names[Math.floor(Math.random() * 8) + 1];
 
