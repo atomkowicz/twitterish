@@ -90,6 +90,7 @@ a {
   width: 100%;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  animation: fadein 0.3s ease-in-out forwards;
 }
 
 @media screen and (min-width:768px) {
@@ -133,6 +134,7 @@ a {
 .Post {
   background: white;
   display: flex;
+  flex-flow: column;
   align-self: center;
   border-radius: 2px;
   height: 300px;
@@ -225,12 +227,7 @@ input:focus:invalid {
 
 /* Animations */
 
-/* .Tile {
-  opacity: 0.01;
-  animation-name: fadein;
-}
-
 @keyframes fadein {
-  0% {opacity: 0.01;}
-  100% {opacity: 1;}
-} */
+  0% {opacity: 0.01; transform: translateX(-300px)}
+  100% {opacity: 1; transform: translateX(0)}
+} 
