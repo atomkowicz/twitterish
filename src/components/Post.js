@@ -25,20 +25,17 @@ class Post extends Component {
                 isFetched: true
             })
         }).catch(err => {
-            console.log(err);
-            // this.props.history.push(`/404`);
-            // switch (err) {
-            //     case 404:
-            //         this.props.history.push(`/404`);
-            //         break;
-            //     default:
-            //         this.setState({
-            //             showModal: true,
-            //             errMsg: err.statusText
-            //         })
-            //         break;
-            // }
-
+            switch ((err.message).toString()) {
+                case "404":
+                    this.props.history.push(`/404`);
+                    break;
+                default:
+                    this.setState({
+                        showModal: true,
+                        errMsg: err.statusText
+                    })
+                    break;
+            }
         });
     }
 
@@ -54,8 +51,9 @@ class Post extends Component {
 
         return (
             <div className="Post">
-                {isFetched ?
-                    <div className="Post__inner">
+                <button onClick={this.props.history.goBack}>Go back</button>
+                {isFetched
+                    ? <div className="Post__inner">
                         <div className="Post__id">Post Id: {id}</div>
                         <div className="Post__userid">Author Id: {userId}</div>
                         <div className="Post__author">Author name: {author}</div>
@@ -68,13 +66,12 @@ class Post extends Component {
                 <Modal
                     isOpen={this.state.showModal}
                     onRequestClose={this.closeModal}
-                    contentLabel="Example Modal">
-                    <h2 >Error</h2>
+                    contentLabel="Error Modal">
+                    <h2>Error</h2>
                     <div>Something's wrong...{this.state.errMsg}</div>
                     <Link to={"/posts"}>
                         <button>close</button>
                     </Link>
-
                 </Modal>
             </div>
 

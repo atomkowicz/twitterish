@@ -6,6 +6,10 @@ const headers = {
 
 export const getPosts = () =>
     fetch(`${API_URL}/posts`, { headers })
+        .then(response => {
+            if (!response.ok) throw Error(response.status);
+            return response;
+        })
         .then(response => response.json())
 
 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Tile from './Tile';
 import escapeRegExp from 'escape-string-regexp'
 import { getPosts } from '../API';
+import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 
 class PostList extends Component {
 
@@ -10,6 +12,8 @@ class PostList extends Component {
         this.state = {
             query: "",
             visiblePosts: [],
+            showModal: false,
+            errMsg: ""
         }
     }
 
@@ -20,12 +24,21 @@ class PostList extends Component {
     }
 
     async componentDidMount() {
-        const posts = await getPosts();
-        for (const post of posts) {
-            await new Promise((_) => setTimeout(_, 1000));
-            const updatedPosts =
-                [...this.state.visiblePosts, post].sort((a, b) => b.id - a.id);
-            this.setState({ visiblePosts: updatedPosts })
+        try {
+            const posts = await getPosts();
+
+            for (const post of posts) {
+                await new Promise((_) => setTimeout(_, 1000));
+                const updatedPosts =
+                    [...this.state.visiblePosts, post].sort((a, b) => b.id - a.id);
+                this.setState({ visiblePosts: updatedPosts })
+            }
+
+        } catch (err) {
+            this.setState({
+                showModal: true,
+                errMsg: (err.message).toString()
+            });
         }
     }
 
@@ -48,9 +61,21 @@ class PostList extends Component {
                         value={query}
                         onChange={(event) => this.updateQuery(event.target.value)} />
                 </div>
+
                 {tiles.length > 0
                     ? <div className="Tile__container">{tiles}</div>
                     : <div> loading ...</div>}
+
+                <Modal
+                    isOpen={this.state.showModal}
+                    onRequestClose={this.closeModal}
+                    contentLabel="Error Modal">
+                    <h2>Error {this.state.errMsg}</h2>
+                    <div>Unable to fetch posts... Please try again later</div>
+                    <Link to={"/"}>
+                        <button>close</button>
+                    </Link>
+                </Modal>
             </div >
         );
     }
