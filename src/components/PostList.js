@@ -9,7 +9,7 @@ class PostList extends Component {
         super();
         this.state = {
             query: "",
-            posts: [],
+            visiblePosts: [],
         }
     }
 
@@ -19,36 +19,24 @@ class PostList extends Component {
         });
     }
 
-    resetQuery = () => {
-        this.setState({
-            query: ""
-        })
-    }
-
-    componentDidMount() {
-        getPosts().then(posts => {
-            this.setState({
-                posts
-            })
-        })
+    async componentDidMount() {
+        const posts = await getPosts();
+        for (const post of posts) {
+            await new Promise((_) => setTimeout(_, 1000));
+            const updatedPosts =
+                [...this.state.visiblePosts, post].sort((a, b) => b.id - a.id);
+            this.setState({ visiblePosts: updatedPosts })
+        }
     }
 
 
     render() {
-        let postToShow = [];
-        const { posts, query } = this.state;
+        const { visiblePosts, query } = this.state;
 
-        if (query) {
-            const match = new RegExp(escapeRegExp(query), "i");
-            postToShow = posts.filter((post) => match.test(post.title) || match.test(post.body));
-        } else {
-            postToShow = posts;
-        }
-
-        const sortedPosts = postToShow
-            .sort((a, b) => b.id - a.id)
-            .map((post, index) => <Tile key={post.id} showTile={false} post={post} />);
-
+        const match = new RegExp(escapeRegExp(query), "i");
+        const tiles = visiblePosts
+            .filter((post) => match.test(post.title) || match.test(post.body))
+            .map((post, index) => <Tile key={post.id} post={post} />);
 
         return (
             <div className="TileList">
@@ -60,9 +48,9 @@ class PostList extends Component {
                         value={query}
                         onChange={(event) => this.updateQuery(event.target.value)} />
                 </div>
-                {postToShow
-                    ? <div className="Tile__container">{sortedPosts}</div>
-                    : < div > loading ...</div>}
+                {tiles.length > 0
+                    ? <div className="Tile__container">{tiles}</div>
+                    : <div> loading ...</div>}
             </div >
         );
     }
